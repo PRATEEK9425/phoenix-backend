@@ -2,10 +2,10 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const { course_detailsmodel } = require("../models/CourseDetailsmodel");
 require('dotenv').config()
-const mailDetailsroutes = express.Router();
+const maildetailsroutes = express.Router();
 
 // SENDING MAIL ROUTES
-mailDetailsroutes.post("/senddetails", async (req, res) => {
+maildetailsroutes.post("/senddetails", async (req, res) => {
   const {useremail,username,Age,Gender,Coursename,Mobile_Number,Address,HighestEducation} = req.body;
   try {
     const emailcheck = await course_detailsmodel.find({ useremail,Coursename });
@@ -69,5 +69,5 @@ mailDetailsroutes.post("/senddetails", async (req, res) => {
 });
 
 module.exports = {
-  mailDetailsroutes,
+  maildetailsroutes,
 };
