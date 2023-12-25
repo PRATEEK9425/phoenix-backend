@@ -1,12 +1,12 @@
 const express = require("express")
-const { courses_model } = require("../models/Coursesmodel")
+const { coursesmodel } = require("../models/Coursesmodel")
 
 const courseroute = express.Router()
 
 
 courseroute.get("/allcourses" ,async(req,res)=>{
     try{
-const courses_data = await courses_model.find()
+const courses_data = await coursesmodel.find()
 res.send(courses_data)
     }catch(err){
         console.log(err);
@@ -18,7 +18,7 @@ res.send(courses_data)
 courseroute.post("/create",async(req,res)=>{
     const payload = req.body
     try{
-const userdata = new courses_model(payload)
+const userdata = new coursesmodel(payload)
 userdata.save()
 res.send({"msg":"New user opting for course data Entered"})
     }catch(err){
@@ -32,7 +32,7 @@ courseroute.patch("/update/:id",async(req,res)=>{
     const payload = req.body
     const Id = req.params.id
   try{
-await courses_model.findByIdAndUpdate({_id:Id},payload)
+await coursesmodel.findByIdAndUpdate({_id:Id},payload)
 res.send("Db Updated")
   }catch(err){
 console.log(err);
@@ -43,7 +43,7 @@ res.send({"Msg":"Not ABLE TO Update"})
     courseroute.delete("/remove/:id" ,async(req,res)=>{
        const ID = req.params.id
        try{
-        await courses_model.findByIdAndDelete(({_id:ID})) 
+        await coursesmodel.findByIdAndDelete(({_id:ID})) 
         res.send({"msg":`User With Id ${ID} Removed`})
        }catch(err){
         console.log(err);

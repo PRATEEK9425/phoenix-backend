@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt');
 const { adminmodel } = require("../models/Adminmodel");
 require('dotenv').config()
 
-const admin_routes = express.Router()
+const adminroutes = express.Router()
 
 // admin register
-admin_routes.post("/admin/phoneix/adminregister",async(req,res)=>{
+adminroutes.post("/admin/phoneix/adminregister",async(req,res)=>{
     const { Admin_name,Admin_email,Admin_password} = req.body
     try{
 const Userpresent = await adminmodel.find({Admin_email})
@@ -36,7 +36,7 @@ console.log(err);
 
 
 // admin login
-admin_routes.post( "/admin/phoneix/mainlogin/mainheadadmin",async(req,res)=>{
+adminroutes.post( "/admin/phoneix/mainlogin/mainheadadmin",async(req,res)=>{
     const { Admin_email,Admin_password} = req.body
    
     try{
@@ -65,5 +65,5 @@ console.log(err);
 
 
 module.exports={
-    admin_routes
+    adminroutes
 }

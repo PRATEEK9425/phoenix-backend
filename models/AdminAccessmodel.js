@@ -1,13 +1,13 @@
 const mongoose = require("mongoose")
 
-const adminacess_schema = mongoose.Schema({
+const adminacessschema = mongoose.Schema({
     Admin_Accessemail:String,
     Admin_Accesspassword:String
 
 })
 
-const adminaccess_model = mongoose.model("Admin_Access_data",adminacess_schema )
+const adminaccessmodel = mongoose.model("Admin_Access_data",adminacessschema )
 
 module.exports={
-    adminaccess_model
+    adminaccessmodel
 }

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const course_detailsschema =mongoose.Schema({
+const coursedetailsschema =mongoose.Schema({
     username:String,
     useremail:String,
     Age:Number,
@@ -12,9 +12,9 @@ const course_detailsschema =mongoose.Schema({
 
 })
 
-const course_detailsmodel = mongoose.model("UserCourseDetails",course_detailsschema)
+const coursedetailsmodel = mongoose.model("UserCourseDetails",coursedetailsschema)
 
 
 module.exports={
-    course_detailsmodel
+    coursedetailsmodel
 }

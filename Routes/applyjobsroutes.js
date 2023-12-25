@@ -1,5 +1,5 @@
 const express = require("express")
-const { applyjobs_model } = require("../models/Applyjobmodel")
+const { applyjobsmodel } = require("../models/Applyjobmodel")
 const nodemailer = require("nodemailer");
 require('dotenv').config()
 const applyjobsrouter = express.Router()
@@ -7,7 +7,7 @@ const applyjobsrouter = express.Router()
 
 applyjobsrouter.get("/",async(req,res)=>{
     try{
-const jobsdata = await applyjobs_model.find()
+const jobsdata = await applyjobsmodel.find()
 res.send(jobsdata)
     }catch(err){
 console.log(err)
@@ -18,7 +18,7 @@ res.send({"msg":"Err while gettting data"})
 applyjobsrouter.get("/:id",async(req,res)=>{
   const id = req.params.id
   try{
-const Jobsdata = await  applyjobs_model.findOne({"_id":id})
+const Jobsdata = await  applyjobsmodel.findOne({"_id":id})
 res.send(Jobsdata)
   }catch(err){
 console.log(err)
@@ -32,13 +32,13 @@ applyjobsrouter.post("/create",async(req,res)=>{
   const {Name,Applyforcourse,Experience,Mobile_no,Email,Location,Age,Current_ctc,Expected_ctc } = req.body
     
   try {
-  const User = await applyjobs_model.find({Email,Applyforcourse})     
+  const User = await applyjobsmodel.find({Email,Applyforcourse})     
 
 
 if(User.length>0){
   res.send("Already Applied")
 }else{
-  const userVerfication  = new applyjobs_model({Name,Applyforcourse,Experience,Mobile_no,Email ,Location,Age,Current_ctc,Expected_ctc })
+  const userVerfication  = new applyjobsmodel({Name,Applyforcourse,Experience,Mobile_no,Email ,Location,Age,Current_ctc,Expected_ctc })
   userVerfication.save()
   
           const transporter = nodemailer.createTransport({
@@ -95,7 +95,7 @@ applyjobsrouter.patch("/update/:id",async(req,res)=>{
     const ID = req.params.id
     const payload = req.body
     try{
-  await applyjobs_model.findByIdAndUpdate({_id:ID},payload)
+  await applyjobsmodel.findByIdAndUpdate({_id:ID},payload)
   res.send("Jobs Updated successfully")
     }catch(err){
   console.log(err)
@@ -106,7 +106,7 @@ applyjobsrouter.patch("/update/:id",async(req,res)=>{
   applyjobsrouter.delete("/remove/:id" ,async(req,res)=>{
     const ID = req.params.id
     try{
-  await applyjobs_model.findByIdAndDelete({_id:ID})
+  await applyjobsmodel.findByIdAndDelete({_id:ID})
   res.send(`DeLeted the Jobs `)
     }catch(err){
   console.log(err)

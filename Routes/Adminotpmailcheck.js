@@ -1,17 +1,17 @@
 const express = require("express")
 const nodemailer = require("nodemailer");
-const { adminverifymail_model } = require("../models/AdminVerifyotpmodel");
+const { adminverifymailmodel } = require("../models/AdminVerifyotpmodel");
 
 require('dotenv').config()
-const adminroutes_otpcheck= express.Router()
+const adminroutesotpcheck= express.Router()
 
 
 // SENDING MAIL ROUTES
-adminroutes_otpcheck.post("/verify",async(req,res)=>{
+adminroutesotpcheck.post("/verify",async(req,res)=>{
     const {Admin_email_verify,email_OTP,isAuth,Username} = req.body
     try {
 
-    const userVerfication  = new  adminverifymail_model({Admin_email_verify,email_OTP,isAuth, Username})
+    const userVerfication  = new  adminverifymailmodel({Admin_email_verify,email_OTP,isAuth, Username})
     userVerfication.save()
     
             const transporter = nodemailer.createTransport({
@@ -45,10 +45,10 @@ adminroutes_otpcheck.post("/verify",async(req,res)=>{
 })
 
 // verfying otp from user entry and Db check
-adminroutes_otpcheck.post("/verifyotp",async(req,res)=>{
+adminroutesotpcheck.post("/verifyotp",async(req,res)=>{
   const {Admin_email_verify,email_OTP} = req.body 
   try {
-    const OTPCHECKING_fROMDB = await  adminverifymail_model.findOne({Admin_email_verify,email_OTP})
+    const OTPCHECKING_fROMDB = await  adminverifymailmodel.findOne({Admin_email_verify,email_OTP})
   //  user entering
     const User_ENTERED_OTP = email_OTP
     const User_ENTERED_Email = Admin_email_verify
@@ -72,10 +72,10 @@ adminroutes_otpcheck.post("/verifyotp",async(req,res)=>{
 
 // Deleting Entry of user in Db 
 
-adminroutes_otpcheck.delete("/remove_otp/:id",async(req,res)=>{
+adminroutesotpcheck.delete("/remove_otp/:id",async(req,res)=>{
   const ID = req.params.id
   try{
-   await  adminverifymail_model.findByIdAndDelete(({_id:ID})) 
+   await  adminverifymailmodel.findByIdAndDelete(({_id:ID})) 
    res.send({"msg":`Entry Removed`})
   }catch(err){
    console.log(err);
@@ -84,4 +84,4 @@ adminroutes_otpcheck.delete("/remove_otp/:id",async(req,res)=>{
 })
 
 
-module.exports={adminroutes_otpcheck}
+module.exports={adminroutesotpcheck}

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const courses_schema = mongoose.Schema({
+const coursesschema = mongoose.Schema({
     userimg:String,
     name:String,
     course :String,
@@ -8,8 +8,8 @@ const courses_schema = mongoose.Schema({
     Highest_Education:String
 })
 
-const courses_model = mongoose.model("Courses",courses_schema)
+const coursesmodel = mongoose.model("Courses",coursesschema)
 
 module.exports={
-    courses_model
+    coursesmodel
 }

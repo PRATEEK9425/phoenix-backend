@@ -19,8 +19,8 @@ const studentlistschema = mongoose.Schema({
   Fess_Deposit:Number
 })
 
-const studentverification_modal = mongoose.model("StudentverificationList",studentlistschema)
+const studentverificationmodal = mongoose.model("StudentverificationList",studentlistschema)
 
 module.exports={
-    studentverification_modal
+    studentverificationmodal
 }

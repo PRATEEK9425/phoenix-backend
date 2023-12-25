@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const applyjobs_schema=mongoose.Schema({
+const applyjobsschema=mongoose.Schema({
     Name: String,
 Experience : Number,
 Mobile_no : Number,
@@ -14,6 +14,6 @@ Expected_ctc : Number
 
 })
 
-const applyjobs_model=mongoose.model("JobsApplyData",applyjobs_schema)
+const applyjobsmodel=mongoose.model("JobsApplyData",applyjobsschema)
 
-module.exports={applyjobs_model}
+module.exports={applyjobsmodel}

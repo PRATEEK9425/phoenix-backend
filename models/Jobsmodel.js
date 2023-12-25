@@ -13,8 +13,8 @@ job_description :String
 })
 
 
-const jobs_model =mongoose.model("Jobsdata",jobschema)
+const jobsmodel =mongoose.model("Jobsdata",jobschema)
 
 module.exports={
-    jobs_model
+    jobsmodel
 }

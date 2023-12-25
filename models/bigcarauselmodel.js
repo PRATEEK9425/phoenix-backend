@@ -5,8 +5,8 @@ const bigcarausel = mongoose.Schema({
    Title:String
 })
 
-const bigcarusel_model = mongoose.model("bigcarusel",bigcarausel)
+const bigcaruselmodel = mongoose.model("bigcarusel",bigcarausel)
 
 module.exports={
-    bigcarusel_model
+    bigcaruselmodel
 }

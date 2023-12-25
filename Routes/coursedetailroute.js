@@ -1,6 +1,6 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
-const { course_detailsmodel } = require("../models/CourseDetailsmodel");
+const { coursedetailsmodel } = require("../models/CourseDetailsmodel");
 require('dotenv').config()
 const maildetailsroutes = express.Router();
 
@@ -8,12 +8,12 @@ const maildetailsroutes = express.Router();
 maildetailsroutes.post("/senddetails", async (req, res) => {
   const {useremail,username,Age,Gender,Coursename,Mobile_Number,Address,HighestEducation} = req.body;
   try {
-    const emailcheck = await course_detailsmodel.find({ useremail,Coursename });
+    const emailcheck = await coursedetailsmodel.find({ useremail,Coursename });
 
     if (emailcheck.length > 0) {
       res.send("Already Applied course");
     } else {
-      const userVerfication = new course_detailsmodel({
+      const userVerfication = new coursedetailsmodel({
         useremail,
         username,
         Age,

@@ -2,14 +2,14 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require('dotenv').config()
-const { adminaccess_model } = require("../models/AdminAccessmodel");
+const { adminaccessmodel } = require("../models/AdminAccessmodel");
 
-const adminaccess_routes = express.Router()
+const adminaccessroutes = express.Router()
 
-adminaccess_routes.post("/register", async (req, res) => {
+adminaccessroutes.post("/register", async (req, res) => {
     const {Admin_Accessemail,Admin_Accesspassword } = req.body;
     try {
-      const Userpresent = await adminaccess_model.find({Admin_Accessemail });
+      const Userpresent = await adminaccessmodel.find({Admin_Accessemail });
   
       if (Userpresent.length > 0) {
         res.send("Present");
@@ -19,7 +19,7 @@ adminaccess_routes.post("/register", async (req, res) => {
           if (err) {
             console.log(err);
           } else {
-            const user = new adminaccess_model({
+            const user = new adminaccessmodel({
               Admin_Accessemail,
               Admin_Accesspassword: Secure_password,
              
@@ -36,11 +36,11 @@ adminaccess_routes.post("/register", async (req, res) => {
   });
 
 
-  adminaccess_routes.post("/login", async (req, res) => {
+  adminaccessroutes.post("/login", async (req, res) => {
     const {Admin_Accessemail,Admin_Accesspassword } = req.body;
   
     try {
-      const user = await adminaccess_model.find({ Admin_Accessemail });
+      const user = await adminaccessmodel.find({ Admin_Accessemail });
       const Hashed_password = user[0].Admin_Accesspassword ;
       if (user.length > 0) {
         bcrypt.compare(Admin_Accesspassword, Hashed_password, (err, result) => {
@@ -62,5 +62,5 @@ adminaccess_routes.post("/register", async (req, res) => {
 
 
   module.exports={
-    adminaccess_routes
+    adminaccessroutes
   }

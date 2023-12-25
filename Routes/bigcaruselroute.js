@@ -1,6 +1,7 @@
 
 const express = require("express")
-const { bigcarusel_model } = require("../models/Bigcarauselmodel")
+const { bigcaruselmodel } = require("../models/bigcarauselmodel")
+
 
 
 
@@ -9,7 +10,7 @@ const bigcaruselRoutes = express.Router()
 bigcaruselRoutes.get("/:id",async(req,res)=>{
   const id = req.params.id
   try{
-const carausel = await  bigcarusel_model.findOne({"_id":id})
+const carausel = await  bigcaruselmodel.findOne({"_id":id})
 res.send(carausel)
   }catch(err){
 console.log(err)
@@ -21,7 +22,7 @@ res.send({"msg":"Err while gettting data"})
 
  bigcaruselRoutes.get("/",async(req,res)=>{
     try{
-const carausel = await bigcarusel_model.find()
+const carausel = await bigcaruselmodel.find()
 res.send(carausel)
     }catch(err){
 console.log(err)
@@ -33,7 +34,7 @@ res.send({"msg":"Err while gettting data"})
  bigcaruselRoutes.post("/create",async(req,res)=>{
     const payload = req.body
   try{
-const caruseldata = new bigcarusel_model(payload)
+const caruseldata = new bigcaruselmodel(payload)
 await caruseldata.save()
 res.send("Added  Image to Db")
 
@@ -47,7 +48,7 @@ res.send({"msg":"Error while adding Image to Db"})
   const ID = req.params.id
   const payload = req.body
   try{
-await bigcarusel_model.findByIdAndUpdate({_id:ID},payload)
+await bigcaruselmodel.findByIdAndUpdate({_id:ID},payload)
 res.send("Image Updated successfully")
   }catch(err){
 console.log(err)
@@ -58,7 +59,7 @@ console.log(err)
 bigcaruselRoutes.delete("/:id",async(req,res)=>{
   const ID = req.params.id
   try{
-await bigcarusel_model.findByIdAndDelete({_id:ID})
+await bigcaruselmodel.findByIdAndDelete({_id:ID})
 res.send(`DeLeted the Image `)
   }catch(err){
 console.log(err)
