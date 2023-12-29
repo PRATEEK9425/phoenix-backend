@@ -6,8 +6,8 @@ const smallcarausel = mongoose.Schema({
    Description:String
 })
 
-const smallcarusel_model = mongoose.model("smallcarusel",smallcarausel)
+const smallcaruselmodel = mongoose.model("smallcarusel",smallcarausel)
 
 module.exports={
-    smallcarusel_model
+    smallcaruselmodel
 }
